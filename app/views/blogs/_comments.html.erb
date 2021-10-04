@@ -1,0 +1,38 @@
+<% if !@comments.nil? && @comments.count > 0 %>
+<h5>Comments by users:</h5>
+  <% @comments.each do |comment| %>
+    <div class="blog_row">
+        <div class="blog_column"><img class="rounded-circle" src="<%=comment.user.profile.avatar_url%>" width="40"></div>
+        <div class="blog_column"><%= comment.body %></div>
+        <div class="blog_column">Commented by: <%= comment.user.name %></div>
+        <div class="blog_column">Posted at: <%= comment.created_at.strftime("%F") %></div>
+        <div class="blog_column">
+            <% if comment.user_id == current_user.id %>
+              <%= link_to 'Edit', edit_blog_comment_path(blog,comment) %> |
+              <%= link_to 'Delete', blog_comment_path(blog, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+        </div>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="bg-light p-2">
+    <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="<%=current_user.profile.avatar_url%>" width="40"><textarea class="form-control ml-1 shadow-none textarea" id="comment_content"></textarea></div>
+    <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button" id="submit">Post comment</button><button id="cancel" class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+</div>
+
+<script type="text/javascript">
+$("#submit").click(function(){
+    var content = $("#comment_content").val();
+    var blog_id = <%=@blog.id%>
+    $.ajax({
+            type: "POST",
+            url: "/blogs/"+blog_id+"/comments#create",
+            data: {body:content, blog_id: blog_id},
+            dataType: "script",
+        })
+});
+$("#cancel").click(function(){
+    $('#comment_content').val('');
+});
+</script>

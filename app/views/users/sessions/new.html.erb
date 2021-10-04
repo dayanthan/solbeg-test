@@ -1,0 +1,14 @@
+<h3 class="display-5">Log In</h3>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "col-12") do |f| %>
+  <div class="form-group">
+    <%= f.email_field :email, autofocus: true, placeholder: "Email", class: "form-control form-control-lg", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.password_field :password, placeholder: "Password", class: "form-control form-control-lg", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Log In", class: "btn btn-info btn-sm btn-block" %>
+  </div>
+<% end %>

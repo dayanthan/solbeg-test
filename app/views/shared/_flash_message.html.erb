@@ -1,0 +1,17 @@
+<% if flash[:alert].present? %>
+	<ul class="nav">
+	  	<li class="nav-item">
+	  		<div class="alert alert-danger mt-10" role="alert">
+	    		<%= flash[:alert] %>
+	  		</div>
+		</li>
+	</ul>
+<% elsif flash[:alert].present? %>
+	<ul class="nav">
+		<li class="nav-item">
+	  		<div class="alert alert-success mt-20" role="alert">
+	    		<%= flash[:notice] %>
+	  		</div>
+		</li>
+	</ul>
+<% end %>

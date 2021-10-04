@@ -1,0 +1,31 @@
+<h3 class="display-5">Sign Up</h3>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "col-12") do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
+  <div class="form-group">
+    <%= f.text_field :name, autofocus: true, placeholder: "Name", class: "form-control form-control-lg", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.email_field :email, placeholder: "Email", class: "form-control form-control-lg", required: true %>
+  </div>
+
+  <div class="form-group">
+    <% password_placeholder = @minimum_password_length ? "Password #{@minimum_password_length} characters minimum" : "Password" %>
+    <%= f.password_field :password, placeholder: password_placeholder, class: "form-control form-control-lg", required: true %>
+  </div>
+
+
+  <%= f.fields_for :profile do |p_form| %>
+    <%= render '/profiles/form', f: p_form %>
+  <% end %>
+
+  <div class="form-check form-group">
+    <label class="form-check-label">
+      <%= f.check_box :role, {checked: false, class: "form-check-input"}, User.roles.key(1), User.roles.key(0) %> Admin
+    </label>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Sign Up", class: "btn btn-info btn-sm btn-block" %>
+  </div>
+<% end %>

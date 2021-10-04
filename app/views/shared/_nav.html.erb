@@ -1,0 +1,30 @@
+<ul class="nav">
+  <li class="nav-item">
+    <%= link_to 'Home', root_path, class: "nav-link" unless current_page?(root_path) %>
+  </li>
+  <% if user_signed_in? %>
+    <!-- START post login block -->
+    <li class="nav-item">
+      <%= link_to 'Logout', destroy_user_session_path, class: "nav-link", method: :delete %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Profile', user_profile_path(current_user, current_user.profile), class: "nav-link" unless current_page?(user_profile_path(current_user, current_user.profile)) %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Users', users_path, class: "nav-link" if current_user.admin? %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Blogs', blogs_path, class: "nav-link"%>
+    </li>
+    <!-- END post login block -->
+  <% else %>
+    <!-- START pre login block -->
+    <li class="nav-item">
+      <%= link_to 'Login', new_user_session_path, class: "nav-link" unless current_page?(new_user_session_path) %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" unless current_page?(new_user_registration_path) %>
+    </li>
+    <!-- END pre login block -->
+  <% end %>
+</ul>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SiplTest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+  </head>
+
+  <body>
+    <div class="container h-100">
+
+      <!-- START current user badge, name, and nav block -->
+      <div class="row h-100 justify-content-center align-items-center">
+        <%= render '/shared/current_user' %>
+        <%= render '/shared/nav' %>
+      </div>
+      <!-- END current user badge, name, and nav block -->
+
+      <!-- START flash message block -->
+      <div class="row h-100 justify-content-center align-items-center">
+        <%= render '/shared/flash_message' %>
+      </div>
+      <!-- END flash message block -->
+
+      <!-- START main content block -->
+      <div class="d-flex align-items-center flex-column justify-content-center h-100">
+        <%= yield %>
+      </div>
+      <!-- END main content block -->
+    </div>
+  </body>
+</html>

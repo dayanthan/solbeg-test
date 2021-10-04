@@ -1,0 +1,12 @@
+<%= form_for([@user, @user.profile], class: "col-12") do |f| %>
+  <!-- common attributers which are applicable base on user role block -->
+  <% if current_user.admin? && current_user.id == @user.id %>
+      <%= render 'common_attr', f: f %>
+  <% else %>
+    <%= render 'form', f: f %>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.submit "Update", class: "btn btn-info btn-sm btn-block" %>
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+  <div class="clearfix">
+    <span class="float-left">
+      Hi <%= current_user.name.capitalize %>
+    </span>
+  </div>
+<% end %>
